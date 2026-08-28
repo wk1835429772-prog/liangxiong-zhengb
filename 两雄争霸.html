@@ -170,6 +170,11 @@ h1.title {
 .item .btn { font-size: 15px; padding: 9px 8px; }
 .owned-badge { text-align: center; font-size: 14px; color: #157a3f; font-weight: bold; padding: 6px 0; }
 .task-done { text-align: center; font-size: 14px; color: #a85400; font-weight: bold; padding: 6px 0; }
+.shop-group { margin-bottom: 16px; }
+.shop-group-title {
+  font-size: 17px; font-weight: 900; color: #1d3d5c; margin: 2px 2px 9px;
+  padding-left: 9px; border-left: 5px solid #e3a51b;
+}
 
 /* 装备页 */
 .slot-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
@@ -515,6 +520,97 @@ h1.title {
     <circle cx="50" cy="50" r="28" fill="none" stroke="#bfe9ff" stroke-width="5" opacity=".8"/>
     <circle cx="50" cy="50" r="14" fill="#5ab4ff" opacity=".45"/>
   </symbol>
+
+  <!-- 第三轮：新增 12 件装备图标 -->
+  <symbol id="i-ishield" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".55"/>
+    <path d="M50 10 L80 20 V52 Q80 78 50 92 Q20 78 20 52 V20 Z" fill="url(#g-steel)" stroke="#4a5a68" stroke-width="3"/>
+    <circle cx="50" cy="48" r="13" fill="#cfd8e0" stroke="#4a5a68" stroke-width="2.5"/>
+    <path d="M31 24 L43 33" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+  </symbol>
+  <symbol id="i-narmor" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".45"/>
+    <path d="M50 6 L59 20 H41 Z" fill="#9fb2c2" stroke="#4a5a68" stroke-width="2.4"/>
+    <rect x="32" y="20" width="36" height="11" rx="4" fill="url(#g-steel)" stroke="#4a5a68" stroke-width="2.4"/>
+    <rect x="27" y="35" width="46" height="42" rx="8" fill="url(#g-steel)" stroke="#4a5a68" stroke-width="3"/>
+    <line x1="50" y1="35" x2="50" y2="77" stroke="#4a5a68" stroke-width="2.4"/>
+    <line x1="27" y1="54" x2="73" y2="54" stroke="#4a5a68" stroke-width="2.4"/>
+    <rect x="33" y="79" width="11" height="14" rx="3" fill="#7d91a3" stroke="#4a5a68" stroke-width="2"/>
+    <rect x="56" y="79" width="11" height="14" rx="3" fill="#7d91a3" stroke="#4a5a68" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-bow" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".45"/>
+    <path d="M30 14 Q76 50 30 86" fill="none" stroke="url(#g-wood)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="30" y1="14" x2="30" y2="86" stroke="#efe6d2" stroke-width="2.5"/>
+    <line x1="30" y1="50" x2="84" y2="50" stroke="#8a5a2b" stroke-width="4" stroke-linecap="round"/>
+    <path d="M84 50 L71 43 M84 50 L71 57" stroke="#4a5a68" stroke-width="3" stroke-linecap="round"/>
+    <path d="M36 43 L24 50 L36 57 Z" fill="#c1121f"/>
+  </symbol>
+  <symbol id="i-farrow" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <line x1="18" y1="80" x2="63" y2="41" stroke="#8a5a2b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M13 89 l5 -13 9 8 Z" fill="#c1121f"/>
+    <path d="M63 41 L82 24 L76 47 Z" fill="url(#g-steel)" stroke="#4a5a68" stroke-width="2"/>
+    <path d="M80 26 Q70 10 83 3 Q81 12 92 14 Q89 26 80 26 Z" fill="url(#g-flame)"/>
+    <circle cx="84" cy="13" r="3" fill="#fff3b0"/>
+  </symbol>
+  <symbol id="i-tarrow" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <line x1="18" y1="80" x2="63" y2="41" stroke="#8a5a2b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M13 89 l5 -13 9 8 Z" fill="#1a6fb5"/>
+    <path d="M63 41 L82 24 L76 47 Z" fill="url(#g-steel)" stroke="#4a5a68" stroke-width="2"/>
+    <path d="M86 4 L68 24 L79 26 L64 44 L92 20 L80 18 Z" fill="#ffdf6b" stroke="#e0961a" stroke-width="2" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="i-boat" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".35"/>
+    <line x1="50" y1="66" x2="50" y2="16" stroke="#6b3f14" stroke-width="4"/>
+    <path d="M53 18 Q82 30 75 58 L53 53 Z" fill="url(#g-gold)" stroke="#a06c08" stroke-width="2.5"/>
+    <path d="M59 32 h10 M59 42 h8" stroke="#c1121f" stroke-width="3" stroke-linecap="round"/>
+    <path d="M50 16 l-9 -7 0 11 Z" fill="#c1121f"/>
+    <path d="M8 64 Q50 75 92 64 L83 84 Q50 92 17 84 Z" fill="url(#g-wood)" stroke="#6b3f14" stroke-width="3"/>
+    <circle cx="30" cy="73" r="3.2" fill="#2b1c0c"/><circle cx="50" cy="76" r="3.2" fill="#2b1c0c"/><circle cx="70" cy="73" r="3.2" fill="#2b1c0c"/>
+  </symbol>
+  <symbol id="i-granary" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <path d="M12 44 L50 14 L88 44 Z" fill="#c1121f" stroke="#8a0f18" stroke-width="3"/>
+    <rect x="22" y="44" width="56" height="42" rx="4" fill="url(#g-wood)" stroke="#6b3f14" stroke-width="3"/>
+    <rect x="40" y="58" width="20" height="28" rx="2" fill="#6b3f14"/>
+    <path d="M29 52 h9 M62 52 h9 M29 64 h7 M64 64 h7" stroke="#e8c88a" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-whip" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <line x1="15" y1="88" x2="40" y2="55" stroke="url(#g-wood)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M40 55 Q64 20 82 28 Q93 35 80 46 Q64 56 61 43" fill="none" stroke="#8a5a2b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M61 43 q-5 11 -15 9" fill="none" stroke="#8a5a2b" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-poison" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <rect x="42" y="14" width="16" height="11" rx="2.5" fill="#6b3f14" stroke="#4a2a10" stroke-width="1.5"/>
+    <path d="M40 29 Q23 44 23 62 Q23 87 50 87 Q77 87 77 62 Q77 44 60 29 Z" fill="#7d4bb5" stroke="#4a2a70" stroke-width="3"/>
+    <path d="M42 47 l16 16 M58 47 l-16 16" stroke="#eafff1" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="34" cy="70" r="3" fill="#b79ae0" opacity=".8"/>
+  </symbol>
+  <symbol id="i-antidote" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <rect x="42" y="14" width="16" height="11" rx="2.5" fill="#2c7a52" stroke="#1d5a3a" stroke-width="1.5"/>
+    <path d="M40 29 Q23 44 23 62 Q23 87 50 87 Q77 87 77 62 Q77 44 60 29 Z" fill="url(#g-jade)" stroke="#2c7a52" stroke-width="3"/>
+    <path d="M50 46 v21 M39.5 56.5 h21" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="34" cy="72" r="3" fill="#c9f2d8" opacity=".9"/>
+  </symbol>
+  <symbol id="i-flag" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <line x1="26" y1="8" x2="26" y2="92" stroke="url(#g-wood)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M28 14 Q60 7 88 15 Q81 33 88 50 Q58 58 28 50 Z" fill="#c1121f" stroke="#8a0f18" stroke-width="3"/>
+    <circle cx="57" cy="32" r="9" fill="none" stroke="#ffdf6b" stroke-width="4"/>
+    <circle cx="57" cy="32" r="2.5" fill="#ffdf6b"/>
+  </symbol>
+  <symbol id="i-planks" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="url(#g-halo)" opacity=".4"/>
+    <rect x="12" y="24" width="76" height="13" rx="6" fill="url(#g-wood)" stroke="#6b3f14" stroke-width="2.5" transform="rotate(-6 50 30)"/>
+    <rect x="12" y="45" width="76" height="13" rx="6" fill="url(#g-wood)" stroke="#6b3f14" stroke-width="2.5"/>
+    <rect x="12" y="66" width="76" height="13" rx="6" fill="url(#g-wood)" stroke="#6b3f14" stroke-width="2.5" transform="rotate(5 50 72)"/>
+    <circle cx="24" cy="31" r="2" fill="#2b1c0c"/><circle cx="76" cy="51" r="2" fill="#2b1c0c"/><circle cx="30" cy="72" r="2" fill="#2b1c0c"/>
+  </symbol>
 </svg>
 
 <div id="app">
@@ -668,14 +764,26 @@ const AI_NAME = '陈小柔';      // 姐姐（对手）
 const SAVE_KEY = 'liangxiong_save_v1';
 
 const ITEMS = {
-  fire_gun:      { name: '火枪',      icon: '🔫', price: 10, type: 'card', desc: '每回合开枪，造成 15 点伤害' },
-  cannon:        { name: '龙王大炮',  icon: '💣', price: 30, type: 'card', desc: '造成 35 点伤害，用过要休息 2 回合' },
-  shield:        { name: '龙王之盾',  icon: '🛡️', price: 12, type: 'card', desc: '本回合挡下 60% 伤害，隔 1 回合才能再用' },
-  dragon_armor:  { name: '龙王盔甲',  icon: '🐲', price: 25, type: 'armor', desc: '受伤减少 30%，并反弹 5 点伤害' },
-  emperor_armor: { name: '皇帝盔甲',  icon: '👑', price: 40, type: 'armor', desc: '生命 +30，伤害 +3，受伤减少 20%' },
-  horse:         { name: '战马',      icon: '🐎', price: 15, type: 'flag', desc: '抢先手！每回合先手率升到 75%' },
-  potion:        { name: '复活药水',  icon: '🧪', price: 8,  type: 'flag', desc: '倒下后复活一次，恢复 50 点生命' },
-  cup:           { name: '玉杯',      icon: '🏆', price: 1,  type: 'cup', desc: '集齐 5 个召唤龙王，开战时先轰对手 50 点' },
+  fire_gun:      { name: '火枪',      icon: '🔫', price: 1,  type: 'card',  desc: '每回合开枪，造成 15 点伤害（可升级）' },
+  bow:           { name: '弓箭',      icon: '🏹', price: 2,  type: 'card',  desc: '中距离射击，造成 22 点伤害（可升级）' },
+  cannon:        { name: '龙王大炮',  icon: '💣', price: 6,  type: 'card',  desc: '造成 35 点伤害，用过要休息 2 回合（可升级）' },
+  fire_arrow:    { name: '火焰箭',    icon: '🔥', price: 3,  type: 'card',  desc: '造成 18 点伤害，并灼烧对手 2 回合（每回合 -4）' },
+  thunder_arrow: { name: '雷电箭',    icon: '⚡', price: 4,  type: 'card',  desc: '造成 20 点伤害，35% 概率电得对手麻痹 1 回合' },
+  poison:        { name: '毒药',      icon: '☠️', price: 2,  type: 'card',  desc: '造成 10 点伤害，并中毒 3 回合（每回合 -3）' },
+  antidote:      { name: '解药',      icon: '💊', price: 3,  type: 'card',  desc: '回复 20 点生命，并解除自己的中毒和灼烧' },
+  shield:        { name: '龙王之盾',  icon: '🛡️', price: 3,  type: 'card',  desc: '本回合挡下 60% 伤害，隔 1 回合才能再用' },
+  iron_shield:   { name: '盾',        icon: '🔰', price: 2,  type: 'card',  desc: '本回合挡下 40% 伤害，隔 1 回合才能再用' },
+  normal_armor:  { name: '普通盔甲',  icon: '🪖', price: 2,  type: 'armor', desc: '受伤减少 20%' },
+  dragon_armor:  { name: '龙王盔甲',  icon: '🐲', price: 3,  type: 'armor', desc: '受伤减少 30%，并反弹 5 点伤害' },
+  emperor_armor: { name: '皇帝盔甲',  icon: '👑', price: 4,  type: 'armor', desc: '生命 +30，伤害 +3，受伤减少 20%' },
+  horse:         { name: '战马',      icon: '🐎', price: 5,  type: 'flag',  desc: '抢先手！每回合先手率升到 75%' },
+  battle_flag:   { name: '战旗',      icon: '🚩', price: 3,  type: 'flag',  desc: '士气高涨！所有攻击伤害 +3' },
+  granary:       { name: '粮仓',      icon: '🌾', price: 2,  type: 'flag',  desc: '理财高手！每天自动进账 +2 R' },
+  whip:          { name: '鞭子',      icon: '🪢', price: 1,  type: 'flag',  desc: '督战有方！武器升级费用减半（1 R/级）' },
+  warship:       { name: '战船',      icon: '🚢', price: 10, type: 'flag',  desc: '楼船压阵！开战后每回合自动炮击对手 10 点' },
+  ship_material: { name: '船料',      icon: '🪵', price: 4,  type: 'flag',  desc: '攒够 3 份船料，即可拼出一艘战船（同战船效果）' },
+  potion:        { name: '复活药水',  icon: '🧪', price: 5,  type: 'flag',  desc: '倒下后复活一次，恢复 50 点生命' },
+  cup:           { name: '玉杯',      icon: '🏆', price: 10, type: 'cup',   desc: '集齐 5 个召唤龙王，开战时先轰对手 50 点' },
 };
 
 // 第二轮：精致重绘图标（SVG 精灵，仅用于展示，不影响任何数值）
@@ -683,6 +791,10 @@ const SVG_ICON = {
   fire_gun: 'i-gun', cannon: 'i-cannon', shield: 'i-shield',
   dragon_armor: 'i-darmor', emperor_armor: 'i-earmor',
   horse: 'i-horse', potion: 'i-potion', cup: 'i-cup',
+  iron_shield: 'i-ishield', normal_armor: 'i-narmor', bow: 'i-bow',
+  fire_arrow: 'i-farrow', thunder_arrow: 'i-tarrow', warship: 'i-boat',
+  granary: 'i-granary', whip: 'i-whip', poison: 'i-poison',
+  antidote: 'i-antidote', battle_flag: 'i-flag', ship_material: 'i-planks',
 };
 function iconSvg(k, cls) {
   const id = SVG_ICON[k];
@@ -696,8 +808,13 @@ const AI_LOADOUT = { cards: ['fire_gun', 'shield'], armor: '', horse: false, pot
 function defaultState() {
   return {
     r: 0,
-    owned: { fire_gun: 0, cannon: 0, shield: 0, dragon_armor: 0, emperor_armor: 0, horse: 0, potion: 0, cup: 0 },
-    wlv: { fire_gun: 1, cannon: 1 },
+    owned: {
+      fire_gun: 0, bow: 0, cannon: 0, fire_arrow: 0, thunder_arrow: 0, poison: 0,
+      antidote: 0, iron_shield: 0, shield: 0, normal_armor: 0, dragon_armor: 0, emperor_armor: 0,
+      horse: 0, battle_flag: 0, granary: 0, whip: 0, warship: 0, ship_material: 0,
+      potion: 0, cup: 0,
+    },
+    wlv: { fire_gun: 1, bow: 1, cannon: 1 },
     loadout: { cards: [], armor: '', horse: false, potion: false },
     tasks: [
       { id: 'sleep',   icon: '🌙', name: '按时睡觉', reward: 5, perDay: 1 },
@@ -706,6 +823,7 @@ function defaultState() {
       { id: 'eat',     icon: '🍚', name: '按时吃饭', reward: 3, perDay: 1 },
     ],
     taskLog: {},
+    granaryDay: '',
     wins: 0,
     losses: 0,
   };
@@ -717,8 +835,9 @@ function loadSave() {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return defaultState();
     const s = Object.assign(defaultState(), JSON.parse(raw));
-    // 老存档兼容：补武器等级与新任务（不覆盖家长自定义任务）
-    s.wlv = Object.assign({ fire_gun: 1, cannon: 1 }, s.wlv);
+    // 老存档兼容：补新物品（缺省 0）、武器等级与新任务（不覆盖家长自定义任务）
+    s.owned = Object.assign({}, defaultState().owned, s.owned);
+    s.wlv = Object.assign({}, defaultState().wlv, s.wlv);
     defaultState().tasks.forEach(b => {
       if (!s.tasks.some(t => t.id === b.id)) s.tasks.push(b);
     });
@@ -749,7 +868,16 @@ function refreshTop() {
   $('coinAmt').textContent = state.r;
   $('winCount').textContent = state.wins;
 }
-function renderMenu() { refreshTop(); }
+function renderMenu() { granaryDaily(); refreshTop(); }
+function granaryDaily() {
+  if (state.owned.granary <= 0) return;
+  const today = todayStr();
+  if (state.granaryDay === today) return;
+  state.granaryDay = today;
+  state.r += 2;
+  save();
+  toastMsg('🌾 粮仓进账 +2 R！');
+}
 
 // ---------- 任务 ----------
 const PACKAGE_GRADES = [
@@ -816,12 +944,17 @@ function showSleepAnim(cb) {
 }
 
 // ---------- 商店 ----------
-// 武器升级（仅火枪/龙王大炮可升级）
-const WEAPON_IDS = ['fire_gun', 'cannon'];
+// 武器升级（火枪/弓箭/龙王大炮可升级）
+const WEAPON_IDS = ['fire_gun', 'bow', 'cannon'];
 const MAX_WLV = 5;      // 最高 5 级
 const WLV_COST = 2;     // 每升 1 级花 2R
 function wlvOf(k) { return (state.wlv && state.wlv[k]) || 1; }
-function weaponDmg(k, lv) { return k === 'fire_gun' ? 15 + 3 * (lv - 1) : 35 + 5 * (lv - 1); }
+function wlvCost() { return state.owned.whip > 0 ? 1 : WLV_COST; }  // 鞭子：升级费减半
+function weaponDmg(k, lv) {
+  if (k === 'fire_gun') return 15 + 3 * (lv - 1);
+  if (k === 'bow') return 22 + 3 * (lv - 1);
+  return 35 + 5 * (lv - 1);
+}
 function toastMsg(msg) {
   const d = document.createElement('div');
   d.className = 'toast';
@@ -833,13 +966,15 @@ function weaponUpgradeHtml(k) {
   if (!WEAPON_IDS.includes(k) || state.owned[k] <= 0) return '';
   const lv = wlvOf(k);
   if (lv >= MAX_WLV) return `<div class="task-done">⭐ 已满级 Lv.${lv}/${MAX_WLV}</div>`;
-  return `<button class="btn btn-gold btn-block" onclick="upgradeWeapon('${k}')" ${state.r < WLV_COST ? 'disabled' : ''}>⚡ 升级 ${WLV_COST} R → Lv.${lv + 1}（伤害 ${weaponDmg(k, lv + 1)}）</button>`;
+  const cost = wlvCost();
+  return `<button class="btn btn-gold btn-block" onclick="upgradeWeapon('${k}')" ${state.r < cost ? 'disabled' : ''}>⚡ 升级 ${cost} R → Lv.${lv + 1}（伤害 ${weaponDmg(k, lv + 1)}）${state.owned.whip > 0 ? '（鞭子半价）' : ''}</button>`;
 }
 function upgradeWeapon(k) {
   const lv = wlvOf(k);
   if (lv >= MAX_WLV) return;
-  if (state.r < WLV_COST) { toastMsg('💰 R 不够，升级要 ' + WLV_COST + ' R，先去做任务吧'); return; }
-  state.r -= WLV_COST;
+  const cost = wlvCost();
+  if (state.r < cost) { toastMsg('💰 R 不够，升级要 ' + cost + ' R，先去做任务吧'); return; }
+  state.r -= cost;
   state.wlv[k] = lv + 1;
   save();
   refreshTop();
@@ -848,31 +983,44 @@ function upgradeWeapon(k) {
   const el = document.querySelector('.item[data-k="' + k + '"]');
   if (el) { el.classList.add('lv-flash'); setTimeout(() => el.classList.remove('lv-flash'), 900); }
 }
+const SHOP_GROUPS = [
+  { title: '⚔️ 武器', keys: ['fire_gun', 'bow', 'cannon', 'fire_arrow', 'thunder_arrow', 'poison'] },
+  { title: '🛡️ 防具', keys: ['iron_shield', 'shield', 'normal_armor', 'dragon_armor', 'emperor_armor'] },
+  { title: '🎒 道具', keys: ['antidote', 'potion', 'horse', 'battle_flag', 'granary', 'whip', 'warship', 'ship_material'] },
+  { title: '🏆 特殊', keys: ['cup'] },
+];
+function shopItemHtml(k) {
+  const it = ITEMS[k];
+  const owned = state.owned[k] > 0;
+  const cupCount = state.owned.cup;
+  const priceText = k === 'cup' && cupCount > 0
+    ? `<div class="price">${it.price} R · 已有 ${cupCount} 个</div>`
+    : k === 'ship_material' && owned
+      ? `<div class="price">${it.price} R · 已收集 ${state.owned[k]} / 3 份</div>`
+      : `<div class="price">${it.price} R</div>`;
+  const lvText = WEAPON_IDS.includes(k)
+    ? `<div class="lv-line">⚡ Lv.${wlvOf(k)}/${MAX_WLV} · 伤害 ${weaponDmg(k, wlvOf(k))}</div>`
+    : '';
+  return `<div class="item" data-k="${k}">
+    <div class="ico">${iconSvg(k)}</div>
+    <div class="nm">${it.name}</div>
+    <div class="ds">${it.desc}</div>
+    ${lvText}
+    ${priceText}
+    ${k === 'cup' || k === 'ship_material'
+      ? `<button class="btn btn-gold" onclick="buyItem('${k}')">${k === 'cup' ? '再买一个' : '再买一份'}</button>`
+      : owned
+        ? `<div class="owned-badge">✅ 已拥有</div>${weaponUpgradeHtml(k)}`
+        : `<button class="btn btn-blue" onclick="buyItem('${k}')">购买</button>`}
+  </div>`;
+}
 function renderShop() {
   const box = $('shopList');
-  box.innerHTML = Object.keys(ITEMS).map(k => {
-    const it = ITEMS[k];
-    const owned = state.owned[k] > 0;
-    const cupCount = state.owned.cup;
-    const priceText = k === 'cup' && cupCount > 0
-      ? `<div class="price">${it.price} R · 已有 ${cupCount} 个</div>`
-      : `<div class="price">${it.price} R</div>`;
-    const lvText = WEAPON_IDS.includes(k)
-      ? `<div class="lv-line">⚡ Lv.${wlvOf(k)}/${MAX_WLV} · 伤害 ${weaponDmg(k, wlvOf(k))}</div>`
-      : '';
-    return `<div class="item" data-k="${k}">
-      <div class="ico">${iconSvg(k)}</div>
-      <div class="nm">${it.name}</div>
-      <div class="ds">${it.desc}</div>
-      ${lvText}
-      ${priceText}
-      ${k === 'cup'
-        ? `<button class="btn btn-gold" onclick="buyItem('${k}')">再买一个</button>`
-        : owned
-          ? `<div class="owned-badge">✅ 已拥有</div>${weaponUpgradeHtml(k)}`
-          : `<button class="btn btn-blue" onclick="buyItem('${k}')">购买</button>`}
-    </div>`;
-  }).join('');
+  box.innerHTML = SHOP_GROUPS.map(g => `
+    <div class="shop-group">
+      <div class="shop-group-title">${g.title}</div>
+      <div class="item-grid">${g.keys.map(shopItemHtml).join('')}</div>
+    </div>`).join('');
 }
 function buyItem(k) {
   const it = ITEMS[k];
@@ -883,7 +1031,7 @@ function buyItem(k) {
   if (k === 'card' || ITEMS[k].type === 'card') {
     if (!state.loadout.cards.includes(k) && state.loadout.cards.length < 3) state.loadout.cards.push(k);
   }
-  if (k === 'dragon_armor' || k === 'emperor_armor') {
+  if (k === 'dragon_armor' || k === 'emperor_armor' || k === 'normal_armor') {
     state.loadout.armor = k;
   }
   if (k === 'horse') state.loadout.horse = true;
@@ -902,6 +1050,10 @@ function renderLoadout() {
   const horseDesc = l.horse ? '🐎 战马' : '（没有战马）';
   const potionDesc = l.potion ? '🧪 复活药水' : '（没有药水）';
   const cups = state.owned.cup;
+  const passives = ['battle_flag', 'granary', 'whip', 'warship', 'ship_material']
+    .filter(k => state.owned[k] > 0)
+    .map(k => `<div class="slot filled">${ITEMS[k].icon} ${ITEMS[k].name}${k === 'ship_material' ? ` × ${state.owned[k]} / 3` : ''}</div>`)
+    .join('');
   $('loadoutBox').innerHTML = `
     <div class="card">
       <div style="font-weight:bold">🎴 出战牌（最多 3 张，拳头免费送）</div>
@@ -918,6 +1070,7 @@ function renderLoadout() {
         <div class="slot ${l.horse ? 'filled' : ''}">${horseDesc}</div>
         <div class="slot ${l.potion ? 'filled' : ''}">${potionDesc}</div>
         <div class="slot filled">🏆 玉杯 × ${cups}（${Math.floor(cups / 5) * 50} 点开场伤害）</div>
+        ${passives}
       </div>
     </div>
     <div class="card">
@@ -939,10 +1092,15 @@ function renderLoadout() {
       status = on ? '✅ 穿着中' : '未穿戴';
       btn = `<button class="btn ${on ? 'btn-gray' : 'btn-blue'} btn-block" onclick="toggleArmor('${k}')">${on ? '脱下' : '穿上'}</button>`;
     } else if (it.type === 'flag') {
-      const key = k === 'horse' ? 'horse' : 'potion';
-      const on = l[key];
-      status = on ? '✅ 已上阵' : '未上阵';
-      btn = `<button class="btn ${on ? 'btn-gray' : 'btn-blue'} btn-block" onclick="toggleFlag('${key}')">${on ? '下阵' : '上阵'}</button>`;
+      if (k === 'horse' || k === 'potion') {
+        const on = l[k];
+        status = on ? '✅ 已上阵' : '未上阵';
+        btn = `<button class="btn ${on ? 'btn-gray' : 'btn-blue'} btn-block" onclick="toggleFlag('${k}')">${on ? '下阵' : '上阵'}</button>`;
+      } else if (k === 'ship_material') {
+        status = state.owned[k] >= 3 ? '✅ 已拼出战船！' : `已收集 ${state.owned[k]} / 3 份`;
+      } else {
+        status = '✅ 被动生效';
+      }
     }
     return `<div class="item" data-k="${k}">
       <div class="ico">${iconSvg(k)}</div>
@@ -1028,8 +1186,12 @@ function buildFighter(side) {
       potion: l.potion,
       potionLeft: l.potion ? 1 : 0,
       cups: state.owned.cup,
-      cds: { cannon: 0, shield: 0 },
+      cds: { cannon: 0, shield: 0, iron_shield: 0 },
       shielding: false,
+      shieldPct: 0,
+      burnLeft: 0, poisonLeft: 0, stunned: 0,
+      hasShip: state.owned.warship > 0 || state.owned.ship_material >= 3,
+      flag: state.owned.battle_flag > 0,
       firstChance: l.horse ? 75 : 50,
     };
   }
@@ -1043,18 +1205,28 @@ function buildFighter(side) {
     potion: false,
     potionLeft: 0,
     cups: 0,
-    cds: { cannon: 0, shield: 0 },
+    cds: { cannon: 0, shield: 0, iron_shield: 0 },
     shielding: false,
+    shieldPct: 0,
+    burnLeft: 0, poisonLeft: 0, stunned: 0,
+    hasShip: false,
+    flag: false,
     firstChance: 50,
   };
 }
 
 function cardDmg(f, card) {
+  if (card === 'antidote') return 0;
   const emp = f.armor === 'emperor_armor';
-  const add = emp ? 3 : 0;
+  let add = emp ? 3 : 0;
+  if (f.flag) add += 3;   // 战旗：士气加成
   if (card === 'fist') return 8 + add;
   if (card === 'fire_gun') return weaponDmg('fire_gun', f.side === 'red' ? wlvOf('fire_gun') : 1) + add;
+  if (card === 'bow') return weaponDmg('bow', f.side === 'red' ? wlvOf('bow') : 1) + add;
   if (card === 'cannon') return weaponDmg('cannon', f.side === 'red' ? wlvOf('cannon') : 1) + add;
+  if (card === 'fire_arrow') return 18 + add;
+  if (card === 'thunder_arrow') return 20 + add;
+  if (card === 'poison') return 10 + add;
   return 0;
 }
 
@@ -1081,24 +1253,67 @@ function startBattle(mode) {
 function beginRound() {
   if (battle.over) return;
   const { red, blue } = battle;
-  red.cds.cannon = Math.max(0, red.cds.cannon - 1);
-  red.cds.shield = Math.max(0, red.cds.shield - 1);
-  blue.cds.shield = Math.max(0, blue.cds.shield - 1);
-  red.shielding = false;
-  blue.shielding = false;
+  [red, blue].forEach(f => {
+    Object.keys(f.cds).forEach(c => { f.cds[c] = Math.max(0, f.cds[c] - 1); });
+    f.shielding = false;
+    f.shieldPct = 0;
+  });
   battle.round++;
+  // 战船：每回合自动炮击 10 点
+  [red, blue].forEach(f => {
+    if (!battle) return;
+    const opp = f.side === 'red' ? battle.blue : battle.red;
+    if (f.hasShip && f.hp > 0 && opp.hp > 0) {
+      opp.hp -= 10;
+      addLog(`🚢 ${f.name} 的战船开炮！${opp.name} 受到 10 点伤害`);
+      renderBattle();
+      checkDeath(opp);
+    }
+  });
+  if (!battle || battle.over) return;
+  // 灼烧 / 中毒：回合开始时发作
+  [red, blue].forEach(tickStatus);
+  if (!battle || battle.over) return;
   battle.first = Math.random() * 100 < red.firstChance ? 'red' : 'blue';
   battle.acted = [];
   addLog(`—— 第 ${battle.round} 回合，${battle.first === 'red' ? PLAYER_NAME + '（弟弟）' : AI_NAME + '（姐姐）'}先手！`);
   renderBattle();
-  if (battle.first === 'red') {
-    battle.phase = 'red_turn';
-  } else {
-    battle.phase = 'blue_turn';
-    if (battle.mode === 'ai') {
-      setTimeout(aiAct, 800);
-    }
+  beginTurn(battle.first);
+}
+function tickStatus(f) {
+  if (!battle) return;
+  if (f.burnLeft > 0) {
+    f.burnLeft--;
+    f.hp -= 4;
+    addLog(`🔥 ${f.name} 被灼烧，损失 4 点生命`);
+    setTimeout(() => floatDmg($('av-' + f.side), '-4', false), 300);
+    renderBattle();
+    checkDeath(f);
+    if (!battle || battle.over) return;
   }
+  if (f.poisonLeft > 0) {
+    f.poisonLeft--;
+    f.hp -= 3;
+    addLog(`☠️ ${f.name} 中毒发作，损失 3 点生命`);
+    setTimeout(() => floatDmg($('av-' + f.side), '-3', false), 300);
+    renderBattle();
+    checkDeath(f);
+  }
+}
+function beginTurn(side) {
+  if (!battle || battle.over) return;
+  const f = side === 'red' ? battle.red : battle.blue;
+  if (f.stunned > 0) {
+    f.stunned = 0;
+    addLog(`⚡ ${f.name} 全身发麻，跳过本回合！`);
+    renderBattle();
+    battle.acted.push(side);
+    if (battle.acted.length >= 2) { setTimeout(beginRound, 700); return; }
+    beginTurn(side === 'red' ? 'blue' : 'red');
+    return;
+  }
+  battle.phase = side + '_turn';
+  if (battle.mode === 'ai' && side === 'blue') setTimeout(aiAct, 800);
   renderBattle();
 }
 
@@ -1106,15 +1321,22 @@ function act(f, card) {
   if (!battle || battle.over || battle.phase !== f.side + '_turn') return;
   const opp = f.side === 'red' ? battle.blue : battle.red;
   // 冷却检查
-  if (card === 'cannon' && f.cds.cannon > 0) return;
-  if (card === 'shield' && f.cds.shield > 0) return;
+  if (f.cds[card] > 0) return;
 
-  if (card === 'shield') {
+  if (card === 'shield' || card === 'iron_shield') {
     f.shielding = true;
-    f.cds.shield = 1;
-    addLog(`${f.name} 举起龙王之盾，挡下 60% 伤害！`);
+    f.shieldPct = card === 'shield' ? 0.6 : 0.4;
+    f.cds[card] = 1;
+    addLog(`${f.name} 举起${ITEMS[card].name}，挡下 ${card === 'shield' ? 60 : 40}% 伤害！`);
     renderBattle();
     showAtkFx(f.side, 'shield');
+  } else if (card === 'antidote') {
+    f.hp = Math.min(f.maxHp, f.hp + 20);
+    f.poisonLeft = 0;
+    f.burnLeft = 0;
+    addLog(`💊 ${f.name} 喝下解药，回复 20 点生命，中毒和灼烧全清！`);
+    setTimeout(() => floatDmg($('av-' + f.side), '+20', true), 320);
+    renderBattle();
   } else {
     const dmg = cardDmg(f, card);
     if (card === 'cannon') f.cds.cannon = 2;
@@ -1122,19 +1344,25 @@ function act(f, card) {
     resolveDamage(f, opp, dmg, icon);
     showAtkFx(opp.side, card);
     if (!battle || battle.over) return;
+    if (card === 'fire_arrow' && opp.hp > 0) {
+      opp.burnLeft = 2;
+      addLog(`🔥 ${opp.name} 被点燃，灼烧 2 回合（每回合 -4）！`);
+    }
+    if (card === 'thunder_arrow' && opp.hp > 0 && Math.random() < 0.35) {
+      opp.stunned = 1;
+      addLog(`⚡ ${opp.name} 被电得麻痹，下回合动不了！`);
+    }
+    if (card === 'poison' && opp.hp > 0) {
+      opp.poisonLeft = 3;
+      addLog(`☠️ ${opp.name} 中毒了！3 回合内每回合 -3`);
+    }
   }
   battle.acted.push(f.side);
   if (battle.acted.length >= 2) {
     setTimeout(beginRound, 700);
     return;
   }
-  // 轮到另一方
-  const next = f.side === 'red' ? 'blue' : 'red';
-  battle.phase = next + '_turn';
-  if (battle.mode === 'ai' && next === 'blue') {
-    setTimeout(aiAct, 800);
-  }
-  renderBattle();
+  beginTurn(f.side === 'red' ? 'blue' : 'red');
 }
 
 function resolveDamage(attacker, defender, rawDmg, icon) {
@@ -1144,10 +1372,10 @@ function resolveDamage(attacker, defender, rawDmg, icon) {
   if (attackerEl) { attackerEl.classList.remove('bounce'); void attackerEl.offsetWidth; attackerEl.classList.add('bounce'); }
   // 龙王盔甲减伤 30%
   if (defender.armor === 'dragon_armor') dmg = Math.max(1, Math.round(dmg * 0.7));
-  // 皇帝盔甲减伤 20%
-  if (defender.armor === 'emperor_armor') dmg = Math.max(1, Math.round(dmg * 0.8));
-  // 盾牌挡 60%
-  if (defender.shielding) dmg = Math.max(1, Math.round(dmg * 0.4));
+  // 皇帝盔甲 / 普通盔甲减伤 20%
+  if (defender.armor === 'emperor_armor' || defender.armor === 'normal_armor') dmg = Math.max(1, Math.round(dmg * 0.8));
+  // 盾牌减伤（龙王之盾 60% / 盾 40%）
+  if (defender.shieldPct > 0) dmg = Math.max(1, Math.round(dmg * (1 - defender.shieldPct)));
 
   setTimeout(() => {
     if (defenderEl) { defenderEl.classList.remove('hit-shake'); void defenderEl.offsetWidth; defenderEl.classList.add('hit-shake'); }
@@ -1226,6 +1454,7 @@ function renderBattle() {
   const { red, blue, mode } = battle;
   const pvp = mode === 'pvp';
   const cdBadge = (f, c) => f.cds[c] > 0 ? `（休息 ${f.cds[c]} 回合）` : '';
+  const badgeOf = f => `${f.armor === 'dragon_armor' ? '🐲' : ''}${f.armor === 'emperor_armor' ? '👑' : ''}${f.armor === 'normal_armor' ? '🪖' : ''}${f.potionLeft > 0 ? '🧪' : ''}${f.shielding ? '🛡️' : ''}${f.burnLeft > 0 ? '🔥' : ''}${f.poisonLeft > 0 ? '☠️' : ''}${f.stunned > 0 ? '⚡' : ''}${f.hasShip ? '🚢' : ''}${f.flag ? '🚩' : ''}${f.horse ? '🐎' : ''}`;
   $('battleBox').innerHTML = `
     <div class="battle-zone">
       <div class="bhero" id="row-blue">
@@ -1234,7 +1463,7 @@ function renderBattle() {
           <div class="name">${blue.name}（姐姐）</div>
           <div class="hpbar"><div class="fill fill-blue" style="width:${Math.max(0, blue.hp / blue.maxHp * 100)}%"></div></div>
           <div class="hp-text">${Math.max(0, blue.hp)} / ${blue.maxHp}</div>
-          <div class="badges">${blue.armor === 'dragon_armor' ? '🐲' : ''}${blue.armor === 'emperor_armor' ? '👑' : ''}${blue.potionLeft > 0 ? '🧪' : ''}${blue.shielding ? '🛡️' : ''}</div>
+          <div class="badges">${badgeOf(blue)}</div>
         </div>
       </div>
       ${pvp ? `<div class="hand" id="hand-blue">${renderHand(blue, blue.side)}</div>` : ''}
@@ -1246,7 +1475,7 @@ function renderBattle() {
           <div class="name">${red.name}（弟弟）</div>
           <div class="hpbar"><div class="fill fill-red" style="width:${Math.max(0, red.hp / red.maxHp * 100)}%"></div></div>
           <div class="hp-text">${Math.max(0, red.hp)} / ${red.maxHp}</div>
-          <div class="badges">${red.armor === 'dragon_armor' ? '🐲' : ''}${red.armor === 'emperor_armor' ? '👑' : ''}${red.potionLeft > 0 ? '🧪' : ''}${red.shielding ? '🛡️' : ''}${red.horse ? '🐎' : ''}</div>
+          <div class="badges">${badgeOf(red)}</div>
         </div>
       </div>
       <div class="hand" id="hand-red">${renderHand(red, red.side)}</div>
@@ -1271,8 +1500,14 @@ function renderHand(f, side) {
     if (!isTurn || onCd) cls.push('disabled');
     let icon = '👊', name = '拳头', dmgText = cardDmg(f, card) + ' 伤害';
     if (card === 'fire_gun') { icon = '🔫'; name = '火枪'; }
+    if (card === 'bow') { icon = '🏹'; name = '弓箭'; }
     if (card === 'cannon') { icon = '💣'; name = '大炮'; dmgText = cardDmg(f, card) + ' 伤害' + cdBadgeStr(f); }
-    if (card === 'shield') { icon = '🛡️'; name = '盾'; dmgText = '挡 60%'; }
+    if (card === 'fire_arrow') { icon = '🔥'; name = '火焰箭'; dmgText = cardDmg(f, card) + ' 伤害+灼烧'; }
+    if (card === 'thunder_arrow') { icon = '⚡'; name = '雷电箭'; dmgText = cardDmg(f, card) + ' 伤害+麻痹'; }
+    if (card === 'poison') { icon = '☠️'; name = '毒药'; dmgText = cardDmg(f, card) + ' 伤害+中毒'; }
+    if (card === 'antidote') { icon = '💊'; name = '解药'; dmgText = '回 20 血+解毒'; }
+    if (card === 'shield') { icon = '🛡️'; name = '龙王之盾'; dmgText = '挡 60%'; }
+    if (card === 'iron_shield') { icon = '🔰'; name = '盾'; dmgText = '挡 40%'; }
     const cdStr = onCd ? `data-cd="${card === 'cannon' ? '休息中' : '休息中'}"` : '';
     return `<div class="${cls.join(' ')}" ${cdStr} onclick="${isTurn && !onCd ? `act(fighterOf('${side}'), '${card}')` : ''}">
       <div class="ci">${card === 'fist' ? icon : iconSvg(card, 'ric')}</div>
@@ -1303,7 +1538,7 @@ function floatDmg(el, text, heal) {
 function showAtkFx(side, card) {
   const av = $('av-' + side);
   if (!av) return;
-  const map = { fist: 'fx-fist', fire_gun: 'fx-gun', cannon: 'fx-cannon', shield: 'fx-shield' };
+  const map = { fist: 'fx-fist', fire_gun: 'fx-gun', bow: 'fx-gun', fire_arrow: 'fx-gun', thunder_arrow: 'fx-gun', cannon: 'fx-cannon', poison: 'fx-cannon', shield: 'fx-shield', iron_shield: 'fx-shield' };
   const id = map[card] || 'fx-fist';
   const d = document.createElement('div');
   d.className = 'atk-fx';
