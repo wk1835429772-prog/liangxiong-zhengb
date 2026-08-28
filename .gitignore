@@ -1,0 +1,21 @@
+# 无关文档（不上传）
+*.docx
+*.pdf
+2026下/
+workbuddy/
+scripts/
+
+# 临时脚本/临时文件
+tmp_*
+!tmp_run_qoder_flash.ps1
+!tmp_run_qoder_max.ps1
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 本地预览截图（保留 v4 系列，其余不上传）
+两雄争霸_预览.png
+两雄争霸_预览_v2.png
+两雄争霸_预览_v3_menu.png
+两雄争霸_预览_v3_shop.png
