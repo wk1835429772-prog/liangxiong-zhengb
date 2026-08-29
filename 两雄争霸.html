@@ -354,6 +354,7 @@ h1.title {
   padding: 8px 12px; margin-bottom: 10px; font-size: 14px; font-weight: 800; color: #0f4d80;
 }
 .sis-row { font-size: 13px; font-weight: 700; color: #0f4d80; background: #eaf6ff; border-radius: 10px; padding: 5px 8px; margin-top: 6px; line-height: 1.5; }
+.vault-summary { font-size: 13px; font-weight: 700; color: #6a4a00; background: #fff6df; border: 2px solid #ffd76a; border-radius: 12px; padding: 6px 10px; margin: 10px 0 2px; line-height: 1.6; text-align: center; }
 .task-ops { display: flex; gap: 6px; justify-content: center; }
 .task-ops .btn { padding: 5px 10px; font-size: 13px; }
 .ric-art { display: block; margin: 0 auto; width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 2px 3px rgba(20,40,60,.25)); background: transparent; }
@@ -699,6 +700,7 @@ h1.title {
         <div class="tag tag-opp">👊 对手 · 姐姐</div>
       </div>
     </div>
+    <div id="vaultSummary" class="vault-summary"></div>
     <button class="btn btn-red cta-fight" onclick="enterBattleScreen()">
       <span class="cta-icon">⚔️</span>
       <span class="cta-label">开战</span>
@@ -880,6 +882,8 @@ function defaultSis() {
     owned: zeroOwned(),
     wlv: { fire_gun: 1, bow: 1, cannon: 1 },
     loadout: { cards: [], armor: '', horse: false, potion: false },
+    taskLog: {},
+    lastSettleDay: '',
   };
 }
 function defaultState() {
@@ -917,6 +921,8 @@ function loadSave() {
     s.sis.owned = Object.assign(zeroOwned(), s.sis.owned);
     s.sis.wlv = Object.assign({ fire_gun: 1, bow: 1, cannon: 1 }, s.sis.wlv);
     s.sis.loadout = Object.assign({ cards: [], armor: '', horse: false, potion: false }, s.sis.loadout);
+    s.sis.taskLog = s.sis.taskLog || {};
+    s.sis.lastSettleDay = s.sis.lastSettleDay || '';
     defaultState().tasks.forEach(b => {
       if (!s.tasks.some(t => t.id === b.id)) s.tasks.push(b);
     });
@@ -945,7 +951,7 @@ function showScreen(name) {
   $('screen-' + name).classList.add('active');
   refreshTop();
   if (name === 'menu') { activeProfile = 'red'; renderMenu(); }
-  if (name === 'tasks') { activeProfile = 'red'; renderTasks(); }
+  if (name === 'tasks') { renderTasks(); }
   if (name === 'shop') renderShop();
   if (name === 'loadout') renderLoadout();
   if (name === 'settings') renderSettings();
@@ -959,7 +965,14 @@ function refreshTop() {
   }
   $('winCount').textContent = state.wins;
 }
-function renderMenu() { granaryDaily(); refreshTop(); }
+function renderMenu() { granaryDaily(); refreshTop(); renderVaultSummary(); }
+function renderVaultSummary() {
+  const el = $('vaultSummary');
+  if (!el) return;
+  const redCnt = Object.values(state.owned).reduce((a, b) => a + b, 0);
+  const blueCnt = Object.values(state.sis.owned).reduce((a, b) => a + b, 0);
+  el.innerHTML = `💰 金库：🧒 ${PLAYER_NAME} <b>${state.r} R</b>（装备 ${redCnt} 件） · 👧 ${AI_NAME} <b>${state.sis.r} R</b>（装备 ${blueCnt} 件）`;
+}
 function granaryDaily() {
   if (state.owned.granary <= 0) return;
   const today = todayStr();
@@ -977,12 +990,20 @@ const PACKAGE_GRADES = [
   { n: '重包裹 🏋️', r: 5 },
 ];
 function taskDoneToday(task) {
-  const log = state.taskLog[task.id] || {};
+  const log = (prof().taskLog || {})[task.id] || {};
   return log[todayStr()] || 0;
+}
+function taskProfileBarHtml() {
+  if (activeProfile === 'red') {
+    return `<div class="profile-bar"><span>🧒 ${PLAYER_NAME}（红方）的任务与金库 · ${state.r} R</span>
+      <button class="btn btn-gray btn-sm" onclick="setProfile('sis');renderTasks()">切到 👧 ${AI_NAME}（蓝方）</button></div>`;
+  }
+  return `<div class="profile-bar"><span>👧 ${AI_NAME}（蓝方）的任务与金库 · ${state.sis.r} R</span>
+    <button class="btn btn-gray btn-sm" onclick="setProfile('red');renderTasks()">切回 🧒 ${PLAYER_NAME}（红方）</button></div>`;
 }
 function renderTasks() {
   const box = $('taskList');
-  box.innerHTML = state.tasks.map(t => {
+  box.innerHTML = taskProfileBarHtml() + state.tasks.map(t => {
     const done = taskDoneToday(t);
     const full = done >= t.perDay;
     const rewardText = t.graded ? '按重量：轻 1R / 中 3R / 重 5R' : `每次 ${t.reward} R`;
@@ -1022,13 +1043,15 @@ function doTask(id) {
 }
 function grantTask(t, rewardOverride, note) {
   const rw = rewardOverride == null ? t.reward : rewardOverride;
-  if (!state.taskLog[t.id]) state.taskLog[t.id] = {};
-  state.taskLog[t.id][todayStr()] = (state.taskLog[t.id][todayStr()] || 0) + 1;
-  state.r += rw;
+  const p = prof();
+  if (!p.taskLog) p.taskLog = {};
+  if (!p.taskLog[t.id]) p.taskLog[t.id] = {};
+  p.taskLog[t.id][todayStr()] = (p.taskLog[t.id][todayStr()] || 0) + 1;
+  p.r += rw;
   save();
   refreshTop();
   renderTasks();
-  alert('👍 任务完成！' + (note ? note + '，' : '') + '获得 ' + rw + ' R');
+  alert('👍 ' + profName() + ' 任务完成！' + (note ? note + '，' : '') + '获得 ' + rw + ' R');
 }
 function showSleepAnim(cb) {
   const ov = document.createElement('div');
@@ -1265,11 +1288,12 @@ function showScreenBattleMenu() {
           <div class="tag">姐姐 · 对手</div>
         </div>
       </div>
-      <div class="sis-row">👧 姐姐当前装备：${sisLoadoutText()}<br>💰 姐姐钱包：${state.sis.r} R${state.sis.r > 0 ? '（双人模式里她可以自己花）' : ''}</div>
-      <button class="btn btn-red btn-block" onclick="startBattle('ai')" style="margin:10px 0">🆚 挑战 ${AI_NAME}（打电脑 · 她会自动买装备变强）</button>
+      <div class="sis-row">👧 姐姐当前装备：${sisLoadoutText()}<br>💰 金库：🧒 ${state.r} R · 👧 ${state.sis.r} R（姐姐和弟弟一样，靠每天做赚钱任务攒钱买装备，可以切到蓝方档案帮她花）</div>
+      <button class="btn btn-red btn-block" onclick="startBattle('ai')" style="margin:10px 0">🆚 挑战 ${AI_NAME}（打电脑 · 她做任务赚钱买装备变强）</button>
       <button class="btn btn-blue btn-block" onclick="startBattle('pvp')">👥 姐弟对战（两个人玩）</button>
       <button class="btn btn-gray btn-block" style="margin-top:8px" onclick="setProfile('sis');showScreen('shop')">🛒 帮姐姐买装备 / 升级（双人模式蓝方）</button>
-      <div class="loadout-tip" style="margin-top:10px">挑战前记得先去商店买装备、到"我的装备"里上阵哦！打电脑时每打完一场，姐姐也会拿零花钱自动买装备、升武器，跟你公平作战。</div>
+      <button class="btn btn-gray btn-block" style="margin-top:6px" onclick="setProfile('sis');showScreen('tasks')">📋 查看姐姐的任务记录与金库</button>
+      <div class="loadout-tip" style="margin-top:10px">公平对决：两个人都要靠赚钱任务攒 R 买装备。打电脑时，姐姐每天自动完成睡觉/拿快递/扫地/吃饭这些任务赚钱，再按策略买装备、升武器——和你同一套经济。</div>
     </div>`;
 }
 
@@ -1562,12 +1586,6 @@ function aiAct() {
 }
 
 // ---------- 第四轮：姐姐自动成长（AI 模式，公平作战） ----------
-function playerPower() {
-  let p = 0;
-  Object.values(state.owned).forEach(n => { p += n; });
-  WEAPON_IDS.forEach(k => { p += 2 * (((state.wlv[k]) || 1) - 1); });
-  return p;
-}
 function sisUpCost() { return state.sis.owned.whip > 0 ? 1 : WLV_COST; }
 function sisCardScore(k) {
   if (WEAPON_IDS.includes(k)) return weaponDmg(k, (state.sis.wlv[k]) || 1);
@@ -1593,9 +1611,7 @@ function sisSyncLoadout() {
 }
 function sisGrow() {
   const sis = state.sis;
-  // 零花钱随弟弟实力增长，保证她跟得上但不碾压
-  const income = 3 + Math.min(12, Math.floor(playerPower() / 2));
-  sis.r += income;
+  sisDailySettle();
   const bought = [];
   const want = ['fire_gun', 'iron_shield', 'bow', 'shield', 'normal_armor', 'fire_arrow',
     'thunder_arrow', 'dragon_armor', 'antidote', 'cannon', 'emperor_armor', 'horse',
@@ -1603,7 +1619,7 @@ function sisGrow() {
   // 弟弟有战船后，姐姐才开始攒船料/买战船
   if (state.owned.warship > 0 || state.owned.ship_material >= 3) want.push('ship_material', 'warship');
   let guard = 0;
-  while (guard++ < 12) {
+  while (guard++ < 4) {  // 每天最多 4 笔支出，细水长流不碾压
     // 1) 武器升级：追平弟弟对应武器的等级
     const upK = sis.loadout.cards.concat(['fire_gun', 'bow', 'cannon'])
       .filter(k => WEAPON_IDS.includes(k) && sis.owned[k] > 0)
@@ -1626,7 +1642,31 @@ function sisGrow() {
   }
   sisSyncLoadout();
   save();
-  if (bought.length) toastMsg('👧 ' + AI_NAME + ' 变强了：' + bought.slice(0, 3).join('、') + (bought.length > 3 ? '…' : ''));
+  if (bought.length) toastMsg('👧 ' + AI_NAME + ' 用自己赚的 R 买了：' + bought.slice(0, 3).join('、') + (bought.length > 3 ? '…' : ''));
+}
+// 姐姐赚钱方式与玩家完全相同：按天自动"完成"内置赚钱任务（睡觉/拿快递/扫地/吃饭），
+// 记录进她自己的 taskLog、按天限次——同一套经济，不凭空发钱
+function sisDailySettle() {
+  const sis = state.sis;
+  const today = todayStr();
+  if (sis.lastSettleDay === today) return;
+  sis.lastSettleDay = today;
+  sis.taskLog = sis.taskLog || {};
+  let earned = 0;
+  const doneNames = [];
+  ['sleep', 'package', 'sweep', 'eat'].forEach(id => {
+    const t = state.tasks.find(x => x.id === id);
+    if (!t) return;
+    const times = t.perDay || 1;
+    const gain = (t.graded ? 3 : (t.reward || 0)) * times;  // 拿快递按中包裹 3R/次 结算
+    if (!sis.taskLog[id]) sis.taskLog[id] = {};
+    sis.taskLog[id][today] = times;
+    earned += gain;
+    doneNames.push(t.icon + t.name + '×' + times);
+  });
+  sis.r += earned;
+  save();
+  if (earned > 0) toastMsg('👧 ' + AI_NAME + ' 做任务赚了 ' + earned + ' R（' + doneNames.join('、') + '）');
 }
 function sisLoadoutText() {
   const sis = state.sis;
@@ -1828,6 +1868,7 @@ function delTaskById(id) {
   if (i < 0) return;
   if (!confirm('确定删除"' + state.tasks[i].name + '"这个任务吗？')) return;
   delete state.taskLog[id];
+  if (state.sis.taskLog) delete state.sis.taskLog[id];
   state.tasks.splice(i, 1);
   save(); renderTasks();
 }
