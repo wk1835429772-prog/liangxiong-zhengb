@@ -346,6 +346,24 @@ h1.title {
   12%,80% { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
+/* ---------- 第四轮：Anima 手绘重绘素材 ---------- */
+.coin-who { font-size: 12px; font-weight: 900; color: #0f4d80; background: #dcf0ff; border: 2px solid #1a6fb5; border-radius: 999px; padding: 2px 8px; }
+.profile-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: #dcf0ff; border: 2px solid #1a6fb5; border-radius: 14px;
+  padding: 8px 12px; margin-bottom: 10px; font-size: 14px; font-weight: 800; color: #0f4d80;
+}
+.sis-row { font-size: 13px; font-weight: 700; color: #0f4d80; background: #eaf6ff; border-radius: 10px; padding: 5px 8px; margin-top: 6px; line-height: 1.5; }
+.task-ops { display: flex; gap: 6px; justify-content: center; }
+.task-ops .btn { padding: 5px 10px; font-size: 13px; }
+.ric-art { display: block; margin: 0 auto; width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 2px 3px rgba(20,40,60,.25)); background: transparent; }
+.item .ico:has(.ric-art) { font-size: 0; }
+.hcard .ric-art { width: 42px; height: 42px; }
+.av-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background: #fff; }
+.banner-art { display: block; width: 100%; height: auto; margin: 4px auto 2px; border-radius: 16px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
+.horse-art { width: 26px; height: 20px; object-fit: contain; vertical-align: -4px; border-radius: 4px; }
+.horse-art-lg { display: block; width: 120px; height: auto; margin: 2px auto; border-radius: 10px; filter: drop-shadow(0 2px 4px rgba(20,40,60,.28)); }
+
 .atk-fx { position: absolute; left: 50%; top: 50%; width: 90px; height: 90px; margin: -45px 0 0 -45px; pointer-events: none; z-index: 6; animation: fxBurst .55s ease forwards; }
 @keyframes fxBurst {
   0% { opacity: 0; transform: scale(.3) rotate(-12deg); }
@@ -616,6 +634,7 @@ h1.title {
 <div id="app">
   <div class="topbar">
     <span class="coin" title="R 就是游戏里的金币">💰 <span id="coinAmt">0</span> R</span>
+    <span id="coinWho" class="coin-who" style="display:none"></span>
     <button class="menu-btn" onclick="showScreen('menu')" title="回主菜单">🏠</button>
   </div>
 
@@ -623,7 +642,8 @@ h1.title {
   <div id="screen-menu" class="screen active">
     <header class="hero">
       <h1 class="title">两雄争霸</h1>
-      <svg class="title-banner" viewBox="0 0 640 170" role="img" aria-label="两雄争霸 · 重绘标题">
+      <img class="banner-art" src="game/art_banner.png" alt="两雄争霸 · 重绘标题" onload="document.getElementById('bannerSvg').style.display='none'" onerror="this.remove()">
+      <svg id="bannerSvg" class="title-banner" viewBox="0 0 640 170" role="img" aria-label="两雄争霸 · 重绘标题">
         <g opacity=".55">
           <path d="M0 158 h40 v-14 h18 v14 h56 v-14 h18 v14 h64 v-14 h18 v14 h64 v-14 h18 v14 h64 v-14 h18 v14 h56 v-14 h18 v14 h64 v-14 h18 v14 h46 v12 H0 Z" fill="#0a2438"/>
         </g>
@@ -668,13 +688,13 @@ h1.title {
     </header>
     <div class="versus">
       <div class="fighter-card">
-        <div class="avatar red-av"><svg class="av-svg" aria-hidden="true"><use href="#w-dazhi"></use></svg><span class="role-flag">你</span></div>
+        <div class="avatar red-av"><img class="av-art" src="game/art_av_dazhi.png" alt="陈大至" onerror="this.outerHTML=avatarFallback('dazhi')"><span class="role-flag">你</span></div>
         <div class="name">陈大至</div>
         <div class="tag tag-you">🎮 玩家 · 弟弟</div>
       </div>
       <div class="vs-badge">VS</div>
       <div class="fighter-card">
-        <div class="avatar blue-av"><svg class="av-svg" aria-hidden="true"><use href="#w-xiaorou"></use></svg></div>
+        <div class="avatar blue-av"><img class="av-art" src="game/art_av_xiaorou.png" alt="陈小柔" onerror="this.outerHTML=avatarFallback('xiaorou')"></div>
         <div class="name">陈小柔</div>
         <div class="tag tag-opp">👊 对手 · 姐姐</div>
       </div>
@@ -796,26 +816,79 @@ const SVG_ICON = {
   granary: 'i-granary', whip: 'i-whip', poison: 'i-poison',
   antidote: 'i-antidote', battle_flag: 'i-flag', ship_material: 'i-planks',
 };
+// 第四轮：Anima 以弟弟手稿为底重绘的素材（优先于 SVG 图标）
+const ART_ICON = {
+  horse: 'game/art_warhorse.png',
+  fire_gun: 'game/art_fire_gun.png',
+  cannon: 'game/art_cannon.png',
+  shield: 'game/art_shield.png',
+  iron_shield: 'game/art_iron_shield.png',
+  poison: 'game/art_poison.png',
+  antidote: 'game/art_antidote.png',
+  potion: 'game/art_potion.png',
+  cup: 'game/art_cup.png',
+  battle_flag: 'game/art_battle_flag.png',
+  ship_material: 'game/art_ship_material.png',
+  bow: 'game/art_bow.png',
+  fire_arrow: 'game/art_fire_arrow.png',
+  thunder_arrow: 'game/art_thunder_arrow.png',
+  normal_armor: 'game/art_normal_armor.png',
+  dragon_armor: 'game/art_dragon_armor.png',
+  emperor_armor: 'game/art_emperor_armor.png',
+  granary: 'game/art_granary.png',
+  whip: 'game/art_whip.png',
+  warship: 'game/art_warship.png',
+};
 function iconSvg(k, cls) {
+  const art = ART_ICON[k];
+  if (art) return `<img class="${cls ? cls + ' ric-art' : 'ric-art'}" src="${art}" alt="${ITEMS[k].name}" onerror="this.outerHTML=iconSvgFallback('${k}','${cls || ''}')">`;
+  return iconSvgFallback(k, cls);
+}
+function iconSvgFallback(k, cls) {
   const id = SVG_ICON[k];
   return id ? `<svg class="${cls || 'ric'}" aria-hidden="true"><use href="#${id}"></use></svg>` : ITEMS[k].icon;
 }
+// 双武士头像（Anima 重绘版优先，缺图时回退 SVG）
+const ART_AVATAR = {
+  dazhi: 'game/art_av_dazhi.png',
+  xiaorou: 'game/art_av_xiaorou.png',
+};
+function avatarFallback(who) {
+  return `<svg class="av-svg" aria-hidden="true"><use href="#w-${who}"></use></svg>`;
+}
+function avatarHtml(who) {
+  const art = ART_AVATAR[who];
+  if (!art) return avatarFallback(who);
+  return `<img class="av-art" src="${art}" alt="" onerror="this.outerHTML=avatarFallback('${who}')">`;
+}
 
-// 姐姐（AI/热座蓝方）的默认装备，固定不变
-const AI_LOADOUT = { cards: ['fire_gun', 'shield'], armor: '', horse: false, potion: false };
+// 第四轮：姐姐（蓝方）装备档案改为动态（AI 模式自动成长 / 双人模式独立购买），
+// 数据存在 state.sis 里，不再写死。
 
 // ---------- 存档 ----------
+function zeroOwned() {
+  return {
+    fire_gun: 0, bow: 0, cannon: 0, fire_arrow: 0, thunder_arrow: 0, poison: 0,
+    antidote: 0, iron_shield: 0, shield: 0, normal_armor: 0, dragon_armor: 0, emperor_armor: 0,
+    horse: 0, battle_flag: 0, granary: 0, whip: 0, warship: 0, ship_material: 0,
+    potion: 0, cup: 0,
+  };
+}
+function defaultSis() {
+  return {
+    r: 0,
+    owned: zeroOwned(),
+    wlv: { fire_gun: 1, bow: 1, cannon: 1 },
+    loadout: { cards: [], armor: '', horse: false, potion: false },
+  };
+}
 function defaultState() {
   return {
     r: 0,
-    owned: {
-      fire_gun: 0, bow: 0, cannon: 0, fire_arrow: 0, thunder_arrow: 0, poison: 0,
-      antidote: 0, iron_shield: 0, shield: 0, normal_armor: 0, dragon_armor: 0, emperor_armor: 0,
-      horse: 0, battle_flag: 0, granary: 0, whip: 0, warship: 0, ship_material: 0,
-      potion: 0, cup: 0,
-    },
+    owned: zeroOwned(),
     wlv: { fire_gun: 1, bow: 1, cannon: 1 },
     loadout: { cards: [], armor: '', horse: false, potion: false },
+    sis: defaultSis(),
     tasks: [
       { id: 'sleep',   icon: '🌙', name: '按时睡觉', reward: 5, perDay: 1 },
       { id: 'package', icon: '📦', name: '拿快递',   reward: 3, perDay: 3, graded: true },
@@ -838,6 +911,12 @@ function loadSave() {
     // 老存档兼容：补新物品（缺省 0）、武器等级与新任务（不覆盖家长自定义任务）
     s.owned = Object.assign({}, defaultState().owned, s.owned);
     s.wlv = Object.assign({}, defaultState().wlv, s.wlv);
+    // 第四轮：姐姐（蓝方）独立档案，老存档自动补全
+    const sd = defaultSis();
+    s.sis = Object.assign(sd, s.sis || {});
+    s.sis.owned = Object.assign(zeroOwned(), s.sis.owned);
+    s.sis.wlv = Object.assign({ fire_gun: 1, bow: 1, cannon: 1 }, s.sis.wlv);
+    s.sis.loadout = Object.assign({ cards: [], armor: '', horse: false, potion: false }, s.sis.loadout);
     defaultState().tasks.forEach(b => {
       if (!s.tasks.some(t => t.id === b.id)) s.tasks.push(b);
     });
@@ -853,19 +932,31 @@ function todayStr() {
 }
 function $(id) { return document.getElementById(id); }
 
+// ---------- 第四轮：双档案（红方弟弟 / 蓝方姐姐） ----------
+// activeProfile = 'red' 时商店/装备页操作弟弟；'sis' 时操作姐姐（双人模式）
+let activeProfile = 'red';
+function prof() { return activeProfile === 'sis' ? state.sis : state; }
+function profName() { return activeProfile === 'sis' ? AI_NAME : PLAYER_NAME; }
+function setProfile(p) { activeProfile = p; refreshTop(); }
+
 // ---------- 屏幕导航 ----------
 function showScreen(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   $('screen-' + name).classList.add('active');
   refreshTop();
-  if (name === 'menu') renderMenu();
-  if (name === 'tasks') renderTasks();
+  if (name === 'menu') { activeProfile = 'red'; renderMenu(); }
+  if (name === 'tasks') { activeProfile = 'red'; renderTasks(); }
   if (name === 'shop') renderShop();
   if (name === 'loadout') renderLoadout();
   if (name === 'settings') renderSettings();
 }
 function refreshTop() {
-  $('coinAmt').textContent = state.r;
+  $('coinAmt').textContent = prof().r;
+  const who = $('coinWho');
+  if (who) {
+    who.style.display = activeProfile === 'sis' ? '' : 'none';
+    who.textContent = '👧 ' + AI_NAME + '的钱包';
+  }
   $('winCount').textContent = state.wins;
 }
 function renderMenu() { granaryDaily(); refreshTop(); }
@@ -895,16 +986,23 @@ function renderTasks() {
     const done = taskDoneToday(t);
     const full = done >= t.perDay;
     const rewardText = t.graded ? '按重量：轻 1R / 中 3R / 重 5R' : `每次 ${t.reward} R`;
+    const ops = t.custom ? `<div class="task-ops">
+        <button class="btn btn-gray" onclick="editTaskById('${t.id}')">✏️ 编辑</button>
+        <button class="btn btn-red" onclick="delTaskById('${t.id}')">🗑️ 删除</button>
+      </div>` : '';
     return `<div class="item">
       <div class="ico">${t.icon}</div>
-      <div class="nm">${t.name}</div>
+      <div class="nm">${t.name}${t.custom ? ' <span style="font-size:12px;color:#1a6fb5">（自定义）</span>' : ''}</div>
       <div class="ds">${rewardText}（每天最多 ${t.perDay} 次）</div>
       <div class="ds">今日：${done} / ${t.perDay}</div>
       ${full
         ? `<div class="task-done">✅ 今天完成啦，明天再来</div>`
         : `<button class="btn btn-gold btn-block" onclick="doTask('${t.id}')">开始！</button>`}
+      ${ops}
     </div>`;
-  }).join('');
+  }).join('') + `
+    <button class="btn btn-blue btn-block" onclick="addCustomTask()">＋ 新增自定义任务（名称 · 奖励 · 每日次数）</button>
+    <div class="loadout-tip" style="margin-top:8px">自定义任务由玩家或家长添加，和内置任务一样：完成发 R、按天记录、存进存档。点"编辑 / 删除"可以随时改。</div>`;
 }
 function doTask(id) {
   const t = state.tasks.find(x => x.id === id);
@@ -948,8 +1046,8 @@ function showSleepAnim(cb) {
 const WEAPON_IDS = ['fire_gun', 'bow', 'cannon'];
 const MAX_WLV = 5;      // 最高 5 级
 const WLV_COST = 2;     // 每升 1 级花 2R
-function wlvOf(k) { return (state.wlv && state.wlv[k]) || 1; }
-function wlvCost() { return state.owned.whip > 0 ? 1 : WLV_COST; }  // 鞭子：升级费减半
+function wlvOf(k) { return (prof().wlv && prof().wlv[k]) || 1; }
+function wlvCost() { return prof().owned.whip > 0 ? 1 : WLV_COST; }  // 鞭子：升级费减半
 function weaponDmg(k, lv) {
   if (k === 'fire_gun') return 15 + 3 * (lv - 1);
   if (k === 'bow') return 22 + 3 * (lv - 1);
@@ -963,19 +1061,21 @@ function toastMsg(msg) {
   setTimeout(() => d.remove(), 1900);
 }
 function weaponUpgradeHtml(k) {
-  if (!WEAPON_IDS.includes(k) || state.owned[k] <= 0) return '';
+  const p = prof();
+  if (!WEAPON_IDS.includes(k) || p.owned[k] <= 0) return '';
   const lv = wlvOf(k);
   if (lv >= MAX_WLV) return `<div class="task-done">⭐ 已满级 Lv.${lv}/${MAX_WLV}</div>`;
   const cost = wlvCost();
-  return `<button class="btn btn-gold btn-block" onclick="upgradeWeapon('${k}')" ${state.r < cost ? 'disabled' : ''}>⚡ 升级 ${cost} R → Lv.${lv + 1}（伤害 ${weaponDmg(k, lv + 1)}）${state.owned.whip > 0 ? '（鞭子半价）' : ''}</button>`;
+  return `<button class="btn btn-gold btn-block" onclick="upgradeWeapon('${k}')" ${p.r < cost ? 'disabled' : ''}>⚡ 升级 ${cost} R → Lv.${lv + 1}（伤害 ${weaponDmg(k, lv + 1)}）${p.owned.whip > 0 ? '（鞭子半价）' : ''}</button>`;
 }
 function upgradeWeapon(k) {
+  const p = prof();
   const lv = wlvOf(k);
   if (lv >= MAX_WLV) return;
   const cost = wlvCost();
-  if (state.r < cost) { toastMsg('💰 R 不够，升级要 ' + cost + ' R，先去做任务吧'); return; }
-  state.r -= cost;
-  state.wlv[k] = lv + 1;
+  if (p.r < cost) { toastMsg('💰 R 不够，升级要 ' + cost + ' R，先去做任务吧'); return; }
+  p.r -= cost;
+  p.wlv[k] = lv + 1;
   save();
   refreshTop();
   renderShop();
@@ -991,12 +1091,13 @@ const SHOP_GROUPS = [
 ];
 function shopItemHtml(k) {
   const it = ITEMS[k];
-  const owned = state.owned[k] > 0;
-  const cupCount = state.owned.cup;
+  const p = prof();
+  const owned = p.owned[k] > 0;
+  const cupCount = p.owned.cup;
   const priceText = k === 'cup' && cupCount > 0
     ? `<div class="price">${it.price} R · 已有 ${cupCount} 个</div>`
     : k === 'ship_material' && owned
-      ? `<div class="price">${it.price} R · 已收集 ${state.owned[k]} / 3 份</div>`
+      ? `<div class="price">${it.price} R · 已收集 ${p.owned[k]} / 3 份</div>`
       : `<div class="price">${it.price} R</div>`;
   const lvText = WEAPON_IDS.includes(k)
     ? `<div class="lv-line">⚡ Lv.${wlvOf(k)}/${MAX_WLV} · 伤害 ${weaponDmg(k, wlvOf(k))}</div>`
@@ -1014,9 +1115,14 @@ function shopItemHtml(k) {
         : `<button class="btn btn-blue" onclick="buyItem('${k}')">购买</button>`}
   </div>`;
 }
+function profileBarHtml() {
+  if (activeProfile === 'red') return '';
+  return `<div class="profile-bar"><span>👧 正在帮 ${AI_NAME}（蓝方）买装备 · 她有 ${state.sis.r} R</span>
+    <button class="btn btn-gray btn-sm" onclick="setProfile('red');showScreen('shop')">切回 🧒 ${PLAYER_NAME}</button></div>`;
+}
 function renderShop() {
   const box = $('shopList');
-  box.innerHTML = SHOP_GROUPS.map(g => `
+  box.innerHTML = profileBarHtml() + SHOP_GROUPS.map(g => `
     <div class="shop-group">
       <div class="shop-group-title">${g.title}</div>
       <div class="item-grid">${g.keys.map(shopItemHtml).join('')}</div>
@@ -1024,39 +1130,42 @@ function renderShop() {
 }
 function buyItem(k) {
   const it = ITEMS[k];
-  if (state.r < it.price) { alert('R 不够哦，先去做任务赚 R 吧！'); return; }
-  state.r -= it.price;
-  state.owned[k] += 1;
+  const p = prof();
+  if (p.r < it.price) { alert('R 不够哦，先去做任务赚 R 吧！'); return; }
+  p.r -= it.price;
+  p.owned[k] += 1;
   // 自动上阵新买的装备（盔甲二选一，最多3张出战牌）
   if (k === 'card' || ITEMS[k].type === 'card') {
-    if (!state.loadout.cards.includes(k) && state.loadout.cards.length < 3) state.loadout.cards.push(k);
+    if (!p.loadout.cards.includes(k) && p.loadout.cards.length < 3) p.loadout.cards.push(k);
   }
   if (k === 'dragon_armor' || k === 'emperor_armor' || k === 'normal_armor') {
-    state.loadout.armor = k;
+    p.loadout.armor = k;
   }
-  if (k === 'horse') state.loadout.horse = true;
-  if (k === 'potion') state.loadout.potion = true;
+  if (k === 'horse') p.loadout.horse = true;
+  if (k === 'potion') p.loadout.potion = true;
   save();
   refreshTop();
   renderShop();
-  alert('🎉 买到了 ' + it.name + '！去"我的装备"看看怎么上阵吧');
+  alert('🎉 ' + profName() + ' 买到了 ' + it.name + '！去"我的装备"看看怎么上阵吧');
 }
 
 // ---------- 装备 ----------
 function renderLoadout() {
-  const l = state.loadout;
-  const cardsDesc = l.cards.map(k => ITEMS[k].icon + ' ' + ITEMS[k].name + (WEAPON_IDS.includes(k) ? ' Lv.' + wlvOf(k) : '')).join('、') || '（还没有）';
+  const p = prof();
+  const l = p.loadout;
   const armorDesc = l.armor ? ITEMS[l.armor].name : '（还没穿盔甲）';
   const horseDesc = l.horse ? '🐎 战马' : '（没有战马）';
   const potionDesc = l.potion ? '🧪 复活药水' : '（没有药水）';
-  const cups = state.owned.cup;
+  const cups = p.owned.cup;
   const passives = ['battle_flag', 'granary', 'whip', 'warship', 'ship_material']
-    .filter(k => state.owned[k] > 0)
-    .map(k => `<div class="slot filled">${ITEMS[k].icon} ${ITEMS[k].name}${k === 'ship_material' ? ` × ${state.owned[k]} / 3` : ''}</div>`)
+    .filter(k => p.owned[k] > 0)
+    .map(k => `<div class="slot filled">${ITEMS[k].icon} ${ITEMS[k].name}${k === 'ship_material' ? ` × ${p.owned[k]} / 3` : ''}</div>`)
     .join('');
   $('loadoutBox').innerHTML = `
+    ${profileBarHtml()}
     <div class="card">
-      <div style="font-weight:bold">🎴 出战牌（最多 3 张，拳头免费送）</div>
+      <div style="font-weight:bold">${activeProfile === 'sis' ? '👧 ' + AI_NAME : '🧒 ' + PLAYER_NAME} 的出战配置</div>
+      <div style="font-weight:bold;margin-top:8px">🎴 出战牌（最多 3 张，拳头免费送）</div>
       <div class="slot-row">
         <div class="slot filled">👊 拳头</div>
         ${l.cards.map(k => `<div class="slot filled">${ITEMS[k].icon} ${ITEMS[k].name}</div>`).join('')}
@@ -1078,11 +1187,11 @@ function renderLoadout() {
       <div class="item-grid" id="loadoutItems"></div>
     </div>`;
   const itemsBox = $('loadoutItems');
-  itemsBox.innerHTML = Object.keys(ITEMS).filter(k => state.owned[k] > 0).map(k => {
+  itemsBox.innerHTML = Object.keys(ITEMS).filter(k => p.owned[k] > 0).map(k => {
     const it = ITEMS[k];
     let status = '', btn = '';
     if (k === 'cup') {
-      status = `已拥有 ${state.owned[k]} 个`;
+      status = `已拥有 ${p.owned[k]} 个`;
     } else if (it.type === 'card') {
       const on = l.cards.includes(k);
       status = on ? '✅ 已上阵' : '未上阵';
@@ -1097,7 +1206,7 @@ function renderLoadout() {
         status = on ? '✅ 已上阵' : '未上阵';
         btn = `<button class="btn ${on ? 'btn-gray' : 'btn-blue'} btn-block" onclick="toggleFlag('${k}')">${on ? '下阵' : '上阵'}</button>`;
       } else if (k === 'ship_material') {
-        status = state.owned[k] >= 3 ? '✅ 已拼出战船！' : `已收集 ${state.owned[k]} / 3 份`;
+        status = p.owned[k] >= 3 ? '✅ 已拼出战船！' : `已收集 ${p.owned[k]} / 3 份`;
       } else {
         status = '✅ 被动生效';
       }
@@ -1114,7 +1223,7 @@ function renderLoadout() {
   if (itemsBox.innerHTML === '') itemsBox.innerHTML = '<div class="loadout-tip">还没有装备，先去商店逛逛吧！</div>';
 }
 function toggleCard(k) {
-  const l = state.loadout;
+  const l = prof().loadout;
   if (l.cards.includes(k)) {
     l.cards = l.cards.filter(x => x !== k);
   } else {
@@ -1124,11 +1233,13 @@ function toggleCard(k) {
   save(); renderLoadout();
 }
 function toggleArmor(k) {
-  state.loadout.armor = state.loadout.armor === k ? '' : k;
+  const l = prof().loadout;
+  l.armor = l.armor === k ? '' : k;
   save(); renderLoadout();
 }
 function toggleFlag(key) {
-  state.loadout[key] = !state.loadout[key];
+  const l = prof().loadout;
+  l[key] = !l[key];
   save(); renderLoadout();
 }
 
@@ -1137,24 +1248,28 @@ let battle = null;
 
 function showScreenBattleMenu() {
   setBattleBack('menu');
+  activeProfile = 'red';
+  refreshTop();
   $('battleBox').innerHTML = `
     <div class="card">
       <div class="versus" style="margin:0 0 8px">
         <div class="fighter-card">
-          <div class="avatar red-av"><svg class="av-svg" aria-hidden="true"><use href="#w-dazhi"></use></svg></div>
+          <div class="avatar red-av">${avatarHtml('dazhi')}</div>
           <div class="name">${PLAYER_NAME}</div>
           <div class="tag">弟弟 · 你</div>
         </div>
         <div class="vs-badge">VS</div>
         <div class="fighter-card">
-          <div class="avatar blue-av"><svg class="av-svg" aria-hidden="true"><use href="#w-xiaorou"></use></svg></div>
+          <div class="avatar blue-av">${avatarHtml('xiaorou')}</div>
           <div class="name">${AI_NAME}</div>
           <div class="tag">姐姐 · 对手</div>
         </div>
       </div>
-      <button class="btn btn-red btn-block" onclick="startBattle('ai')" style="margin-bottom:10px">🆚 挑战 ${AI_NAME}（打电脑）</button>
+      <div class="sis-row">👧 姐姐当前装备：${sisLoadoutText()}<br>💰 姐姐钱包：${state.sis.r} R${state.sis.r > 0 ? '（双人模式里她可以自己花）' : ''}</div>
+      <button class="btn btn-red btn-block" onclick="startBattle('ai')" style="margin:10px 0">🆚 挑战 ${AI_NAME}（打电脑 · 她会自动买装备变强）</button>
       <button class="btn btn-blue btn-block" onclick="startBattle('pvp')">👥 姐弟对战（两个人玩）</button>
-      <div class="loadout-tip" style="margin-top:10px">挑战前记得先去商店买装备、到"我的装备"里上阵哦！</div>
+      <button class="btn btn-gray btn-block" style="margin-top:8px" onclick="setProfile('sis');showScreen('shop')">🛒 帮姐姐买装备 / 升级（双人模式蓝方）</button>
+      <div class="loadout-tip" style="margin-top:10px">挑战前记得先去商店买装备、到"我的装备"里上阵哦！打电脑时每打完一场，姐姐也会拿零花钱自动买装备、升武器，跟你公平作战。</div>
     </div>`;
 }
 
@@ -1171,48 +1286,33 @@ function setBattleBack(mode) {
 }
 
 function buildFighter(side) {
-  // side: 'red' = 弟弟玩家, 'blue' = 姐姐 AI
-  const emp = side === 'red' && state.loadout.armor === 'emperor_armor';
-  const dragon = side === 'red' && state.loadout.armor === 'dragon_armor';
+  // side: 'red' = 弟弟玩家, 'blue' = 姐姐（AI 模式自动成长 / 双人模式蓝方玩家）
+  const p = side === 'red' ? state : state.sis;
+  const l = p.loadout;
+  const emp = l.armor === 'emperor_armor';
   const maxHp = 100 + (emp ? 30 : 0);
-  if (side === 'red') {
-    const l = state.loadout;
-    return {
-      side, name: PLAYER_NAME, emoji: '🧒',
-      maxHp, hp: maxHp,
-      cards: ['fist', ...l.cards],
-      armor: l.armor,
-      horse: l.horse,
-      potion: l.potion,
-      potionLeft: l.potion ? 1 : 0,
-      cups: state.owned.cup,
-      cds: { cannon: 0, shield: 0, iron_shield: 0 },
-      shielding: false,
-      shieldPct: 0,
-      burnLeft: 0, poisonLeft: 0, stunned: 0,
-      hasShip: state.owned.warship > 0 || state.owned.ship_material >= 3,
-      flag: state.owned.battle_flag > 0,
-      firstChance: l.horse ? 75 : 50,
-    };
-  }
-  // 姐姐（AI/热座蓝方）固定配置
   return {
-    side, name: AI_NAME, emoji: '👧',
-    maxHp: 100, hp: 100,
-    cards: ['fist', 'fire_gun', 'shield'],
-    armor: '',
-    horse: false,
-    potion: false,
-    potionLeft: 0,
-    cups: 0,
+    side, name: side === 'red' ? PLAYER_NAME : AI_NAME, emoji: side === 'red' ? '🧒' : '👧',
+    maxHp, hp: maxHp,
+    cards: ['fist', ...l.cards],
+    armor: l.armor,
+    horse: l.horse,
+    potion: l.potion,
+    potionLeft: l.potion ? 1 : 0,
+    cups: p.owned.cup,
     cds: { cannon: 0, shield: 0, iron_shield: 0 },
     shielding: false,
     shieldPct: 0,
     burnLeft: 0, poisonLeft: 0, stunned: 0,
-    hasShip: false,
-    flag: false,
-    firstChance: 50,
+    hasShip: p.owned.warship > 0 || p.owned.ship_material >= 3,
+    flag: p.owned.battle_flag > 0,
+    firstChance: l.horse ? 75 : 50,
   };
+}
+
+function wlvSide(side, k) {
+  const p = side === 'red' ? state : state.sis;
+  return (p.wlv && p.wlv[k]) || 1;
 }
 
 function cardDmg(f, card) {
@@ -1221,9 +1321,9 @@ function cardDmg(f, card) {
   let add = emp ? 3 : 0;
   if (f.flag) add += 3;   // 战旗：士气加成
   if (card === 'fist') return 8 + add;
-  if (card === 'fire_gun') return weaponDmg('fire_gun', f.side === 'red' ? wlvOf('fire_gun') : 1) + add;
-  if (card === 'bow') return weaponDmg('bow', f.side === 'red' ? wlvOf('bow') : 1) + add;
-  if (card === 'cannon') return weaponDmg('cannon', f.side === 'red' ? wlvOf('cannon') : 1) + add;
+  if (card === 'fire_gun') return weaponDmg('fire_gun', wlvSide(f.side, 'fire_gun')) + add;
+  if (card === 'bow') return weaponDmg('bow', wlvSide(f.side, 'bow')) + add;
+  if (card === 'cannon') return weaponDmg('cannon', wlvSide(f.side, 'cannon')) + add;
   if (card === 'fire_arrow') return 18 + add;
   if (card === 'thunder_arrow') return 20 + add;
   if (card === 'poison') return 10 + add;
@@ -1416,8 +1516,10 @@ function endBattle(winner) {
   setBattleBack('menu');
   if (battle) {
     if (winner === 'red') state.wins++; else state.losses++;
+    if (battle.mode === 'ai') sisGrow();   // 公平作战：每场打完姐姐自动变强
     save();
   }
+  activeProfile = 'red';
   const win = winner === 'red';
   $('battleBox').innerHTML = `
     <div class="overlay" style="position:relative;background:none;z-index:auto">
@@ -1437,10 +1539,20 @@ function endBattle(winner) {
 function aiChoose() {
   const f = battle.blue;
   const opp = battle.red;
-  const has = c => f.cards.includes(c) && f.cds[c] <= 0;
-  if (f.hp < 28 && has('shield') && Math.random() < 0.7) return 'shield';
-  if (has('fire_gun') && opp.hp <= cardDmg(f, 'fire_gun')) return 'fire_gun';
-  if (has('fire_gun') && Math.random() < 0.55) return 'fire_gun';
+  const usable = c => f.cards.includes(c) && f.cds[c] <= 0;
+  const attacks = f.cards.filter(c => c !== 'fist' && usable(c) && cardDmg(f, c) > 0)
+    .sort((a, b) => cardDmg(f, b) - cardDmg(f, a));
+  // 残血自救：解药 > 盾
+  if (f.hp < 30 && usable('antidote') && (f.poisonLeft > 0 || f.burnLeft > 0 || Math.random() < 0.45)) return 'antidote';
+  if (f.hp < 28 && Math.random() < 0.7) {
+    if (usable('shield')) return 'shield';
+    if (usable('iron_shield')) return 'iron_shield';
+  }
+  // 斩杀
+  if (attacks.length && opp.hp <= cardDmg(f, attacks[0])) return attacks[0];
+  if (attacks.length && Math.random() < 0.8) {
+    return Math.random() < 0.7 ? attacks[0] : attacks[Math.floor(Math.random() * attacks.length)];
+  }
   return 'fist';
 }
 function aiAct() {
@@ -1449,16 +1561,94 @@ function aiAct() {
   act(battle.blue, card);
 }
 
+// ---------- 第四轮：姐姐自动成长（AI 模式，公平作战） ----------
+function playerPower() {
+  let p = 0;
+  Object.values(state.owned).forEach(n => { p += n; });
+  WEAPON_IDS.forEach(k => { p += 2 * (((state.wlv[k]) || 1) - 1); });
+  return p;
+}
+function sisUpCost() { return state.sis.owned.whip > 0 ? 1 : WLV_COST; }
+function sisCardScore(k) {
+  if (WEAPON_IDS.includes(k)) return weaponDmg(k, (state.sis.wlv[k]) || 1);
+  if (k === 'thunder_arrow') return 24;
+  if (k === 'fire_arrow') return 22;
+  if (k === 'poison') return 16;
+  return 0;
+}
+function sisSyncLoadout() {
+  const sis = state.sis;
+  const cards = ['cannon', 'bow', 'fire_gun', 'thunder_arrow', 'fire_arrow', 'poison']
+    .filter(k => sis.owned[k] > 0)
+    .sort((a, b) => sisCardScore(b) - sisCardScore(a))
+    .slice(0, 3);
+  ['shield', 'iron_shield'].forEach(s => {
+    if (sis.owned[s] > 0 && cards.length < 3 && !cards.includes(s)) cards.push(s);
+  });
+  if (sis.owned.antidote > 0 && cards.length < 3 && !cards.includes('antidote')) cards.push('antidote');
+  sis.loadout.cards = cards.slice(0, 3);
+  sis.loadout.armor = ['emperor_armor', 'dragon_armor', 'normal_armor'].find(k => sis.owned[k] > 0) || '';
+  sis.loadout.horse = sis.owned.horse > 0;
+  sis.loadout.potion = sis.owned.potion > 0;
+}
+function sisGrow() {
+  const sis = state.sis;
+  // 零花钱随弟弟实力增长，保证她跟得上但不碾压
+  const income = 3 + Math.min(12, Math.floor(playerPower() / 2));
+  sis.r += income;
+  const bought = [];
+  const want = ['fire_gun', 'iron_shield', 'bow', 'shield', 'normal_armor', 'fire_arrow',
+    'thunder_arrow', 'dragon_armor', 'antidote', 'cannon', 'emperor_armor', 'horse',
+    'battle_flag', 'potion', 'whip'];
+  // 弟弟有战船后，姐姐才开始攒船料/买战船
+  if (state.owned.warship > 0 || state.owned.ship_material >= 3) want.push('ship_material', 'warship');
+  let guard = 0;
+  while (guard++ < 12) {
+    // 1) 武器升级：追平弟弟对应武器的等级
+    const upK = sis.loadout.cards.concat(['fire_gun', 'bow', 'cannon'])
+      .filter(k => WEAPON_IDS.includes(k) && sis.owned[k] > 0)
+      .find(k => ((sis.wlv[k]) || 1) < ((state.wlv[k]) || 1) && sis.r >= sisUpCost());
+    if (upK) {
+      sis.r -= sisUpCost();
+      sis.wlv[upK] = ((sis.wlv[upK]) || 1) + 1;
+      bought.push(ITEMS[upK].name + ' Lv.' + sis.wlv[upK]);
+      continue;
+    }
+    // 2) 按策略清单买缺的装备
+    const k = want.find(x => sis.owned[x] <= 0 && ITEMS[x].price <= sis.r);
+    if (k) {
+      sis.r -= ITEMS[k].price;
+      sis.owned[k] += 1;
+      bought.push(ITEMS[k].name);
+      continue;
+    }
+    break;
+  }
+  sisSyncLoadout();
+  save();
+  if (bought.length) toastMsg('👧 ' + AI_NAME + ' 变强了：' + bought.slice(0, 3).join('、') + (bought.length > 3 ? '…' : ''));
+}
+function sisLoadoutText() {
+  const sis = state.sis;
+  const parts = sis.loadout.cards.map(k => ITEMS[k].icon + ' ' + ITEMS[k].name + (WEAPON_IDS.includes(k) ? ' Lv.' + ((sis.wlv[k]) || 1) : ''));
+  if (sis.loadout.armor) parts.push(ITEMS[sis.loadout.armor].icon + ' ' + ITEMS[sis.loadout.armor].name);
+  if (sis.loadout.horse) parts.push('🐎 战马');
+  if (sis.loadout.potion) parts.push('🧪 复活药水');
+  if (sis.owned.battle_flag > 0) parts.push('🚩 战旗');
+  if (sis.owned.warship > 0 || sis.owned.ship_material >= 3) parts.push('🚢 战船');
+  return parts.length ? parts.join(' · ') : '赤手空拳（还没装备）';
+}
+
 function renderBattle() {
   if (!battle) return;
   const { red, blue, mode } = battle;
   const pvp = mode === 'pvp';
   const cdBadge = (f, c) => f.cds[c] > 0 ? `（休息 ${f.cds[c]} 回合）` : '';
-  const badgeOf = f => `${f.armor === 'dragon_armor' ? '🐲' : ''}${f.armor === 'emperor_armor' ? '👑' : ''}${f.armor === 'normal_armor' ? '🪖' : ''}${f.potionLeft > 0 ? '🧪' : ''}${f.shielding ? '🛡️' : ''}${f.burnLeft > 0 ? '🔥' : ''}${f.poisonLeft > 0 ? '☠️' : ''}${f.stunned > 0 ? '⚡' : ''}${f.hasShip ? '🚢' : ''}${f.flag ? '🚩' : ''}${f.horse ? '🐎' : ''}`;
+  const badgeOf = f => `${f.armor === 'dragon_armor' ? '🐲' : ''}${f.armor === 'emperor_armor' ? '👑' : ''}${f.armor === 'normal_armor' ? '🪖' : ''}${f.potionLeft > 0 ? '🧪' : ''}${f.shielding ? '🛡️' : ''}${f.burnLeft > 0 ? '🔥' : ''}${f.poisonLeft > 0 ? '☠️' : ''}${f.stunned > 0 ? '⚡' : ''}${f.hasShip ? '🚢' : ''}${f.flag ? '🚩' : ''}${f.horse ? '<img class="horse-art" src="game/art_warhorse.png" alt="战马">' : ''}`;
   $('battleBox').innerHTML = `
     <div class="battle-zone">
       <div class="bhero" id="row-blue">
-        <div class="avatar blue-av" id="av-blue"><svg class="av-svg" aria-hidden="true"><use href="#w-xiaorou"></use></svg></div>
+        <div class="avatar blue-av" id="av-blue">${avatarHtml('xiaorou')}</div>
         <div class="info">
           <div class="name">${blue.name}（姐姐）</div>
           <div class="hpbar"><div class="fill fill-blue" style="width:${Math.max(0, blue.hp / blue.maxHp * 100)}%"></div></div>
@@ -1470,7 +1660,7 @@ function renderBattle() {
       <div class="turn-banner" id="turnBanner">${turnText()}</div>
       <div class="log" id="battleLog">${battle.log.map(l => `<p>${l}</p>`).join('')}</div>
       <div class="bhero" id="row-red">
-        <div class="avatar red-av" id="av-red"><svg class="av-svg" aria-hidden="true"><use href="#w-dazhi"></use></svg></div>
+        <div class="avatar red-av" id="av-red">${avatarHtml('dazhi')}</div>
         <div class="info">
           <div class="name">${red.name}（弟弟）</div>
           <div class="hpbar"><div class="fill fill-red" style="width:${Math.max(0, red.hp / red.maxHp * 100)}%"></div></div>
@@ -1588,31 +1778,58 @@ function renderSettings() {
       <button class="btn btn-red btn-sm" onclick="delTask(${i})">删</button>
     </div>`).join('');
 }
+function promptTaskFields(t) {
+  const name = prompt('任务名称（比如：按时睡觉、写作业）：', t ? t.name : '');
+  if (name === null) return null;
+  if (!name.trim()) { alert('名称不能为空'); return null; }
+  const reward = parseInt(prompt('奖励多少 R？', t ? String(t.reward) : '3'), 10);
+  if (isNaN(reward) || reward <= 0) { alert('奖励要填大于 0 的数字'); return null; }
+  const perDay = parseInt(prompt('每天最多做几次？', t ? String(t.perDay) : '1'), 10);
+  if (isNaN(perDay) || perDay <= 0) { alert('次数要填大于 0 的数字'); return null; }
+  return { name: name.trim(), reward, perDay };
+}
 function addTask() {
-  const name = prompt('任务名称（比如：按时睡觉、写作业）：');
-  if (!name) return;
-  const reward = parseInt(prompt('奖励多少 R？'), 10);
-  if (isNaN(reward) || reward <= 0) { alert('奖励要填大于 0 的数字'); return; }
-  const perDay = parseInt(prompt('每天最多做几次？', '1'), 10);
-  if (isNaN(perDay) || perDay <= 0) { alert('次数要填大于 0 的数字'); return; }
-  state.tasks.push({ id: 't' + Date.now(), icon: '⭐', name, reward, perDay });
+  const f = promptTaskFields(null);
+  if (!f) return;
+  state.tasks.push({ id: 't' + Date.now(), icon: '⭐', custom: true, name: f.name, reward: f.reward, perDay: f.perDay });
   save(); renderSettings();
+}
+function addCustomTask() {
+  const f = promptTaskFields(null);
+  if (!f) return;
+  state.tasks.push({ id: 't' + Date.now(), icon: '⭐', custom: true, name: f.name, reward: f.reward, perDay: f.perDay });
+  save(); renderTasks(); refreshTop();
+  toastMsg('⭐ 新任务已添加：' + f.name);
 }
 function editTask(i) {
   const t = state.tasks[i];
-  const name = prompt('任务名称：', t.name);
-  if (!name) return;
-  const reward = parseInt(prompt('奖励多少 R？', String(t.reward)), 10);
-  if (isNaN(reward) || reward <= 0) { alert('奖励要填大于 0 的数字'); return; }
-  const perDay = parseInt(prompt('每天最多做几次？', String(t.perDay)), 10);
-  if (isNaN(perDay) || perDay <= 0) { alert('次数要填大于 0 的数字'); return; }
-  t.name = name; t.reward = reward; t.perDay = perDay;
+  const f = promptTaskFields(t);
+  if (!f) return;
+  t.name = f.name; t.reward = f.reward; t.perDay = f.perDay;
   save(); renderSettings();
+}
+function editTaskById(id) {
+  const i = state.tasks.findIndex(x => x.id === id);
+  if (i < 0) return;
+  const t = state.tasks[i];
+  const f = promptTaskFields(t);
+  if (!f) return;
+  t.name = f.name; t.reward = f.reward; t.perDay = f.perDay;
+  save(); renderTasks();
+  toastMsg('✏️ 任务已更新：' + t.name);
 }
 function delTask(i) {
   if (!confirm('确定删除这个任务吗？')) return;
   state.tasks.splice(i, 1);
   save(); renderSettings();
+}
+function delTaskById(id) {
+  const i = state.tasks.findIndex(x => x.id === id);
+  if (i < 0) return;
+  if (!confirm('确定删除"' + state.tasks[i].name + '"这个任务吗？')) return;
+  delete state.taskLog[id];
+  state.tasks.splice(i, 1);
+  save(); renderTasks();
 }
 function resetSave() {
   if (!confirm('确定清空所有金币、装备和记录吗？弟弟会伤心的哦！')) return;
